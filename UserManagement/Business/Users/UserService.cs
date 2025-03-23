@@ -22,7 +22,10 @@ public class UserService : IUserService
 
     public void DeleteUserById(int id)
     {
-        throw new NotImplementedException();
+        var userToDelete = _context.User.FirstOrDefault(u => u.UserId == id);
+
+        _context.User.Remove(userToDelete);
+        _context.SaveChanges();
     }
 
     public IEnumerable<RegisterUserDto> FindAllUsers()

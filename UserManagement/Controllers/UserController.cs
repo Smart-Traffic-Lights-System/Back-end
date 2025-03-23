@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Business.Users;
@@ -31,7 +32,7 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpGet("GetUserById/{id}")]
+        [HttpGet("GetUserById/{UserId}")]
         public ActionResult<RegisterUserDto> GetUserById(int id)
         {
             try
@@ -49,7 +50,7 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpGet("GetUserByUsername/{username}")]
+        [HttpGet("GetUserByUsername/{Username}")]
         public ActionResult<RegisterUserDto> GetUserByUsername(string username)
         {
             try
@@ -67,7 +68,7 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpPut("UpdateUser/{userId}")]
+        [HttpPut("UpdateUser/{UserId}")]
         public ActionResult<RegisterUserDto> ModifyUser([FromBody] RegisterUserDto userDto)
         {
             try
@@ -97,6 +98,27 @@ namespace UserManagement.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
+
+        [HttpDelete("DeleteUser/{UserId}"), Authorize(Roles = "Admin")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                var existingUser = _userService.FindUserById(id);
+                if (existingUser == null)
+                {
+                    return NotFound("User not found.");
+                }
+
+                _userService.DeleteUserById(id);
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }
