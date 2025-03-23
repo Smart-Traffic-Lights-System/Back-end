@@ -1,4 +1,6 @@
 using System;
+using System.Security.Cryptography;
+using System.Text;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UserData;
@@ -11,13 +13,11 @@ public class UserService : IUserService
 {
     private readonly UserDbContext _context;
     private readonly IMapper _mapper;
-    private readonly IAuthService _authService;
 
-    public UserService(UserDbContext context, IMapper mapper, IAuthService authService)
+    public UserService(UserDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
-        _authService = authService;
     }
 
     public void DeleteUserById(int id)
@@ -69,7 +69,7 @@ public class UserService : IUserService
         UserBusinessLogic.DefinePasswordBL(password);
 
         string hashedPassword = string.Empty;
-        _authService.HashPassword(password, ref hashedPassword);
+        HashPassword(password, ref hashedPassword);
         userDto.Password = hashedPassword;
 
         var user = _context.User.FirstOrDefault(x => x.UserId == userId);
@@ -107,5 +107,16 @@ public class UserService : IUserService
         updatedUserDto.UserId = 0;
 
         return updatedUserDto;
+    }
+    
+    private void HashPassword(string password, ref string hashedPassword)
+    {
+        byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] hashedBytes = sha256.ComputeHash(passwordBytes);
+            hashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "");
+        }
     }
 }

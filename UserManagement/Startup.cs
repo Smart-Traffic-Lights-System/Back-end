@@ -1,15 +1,12 @@
-using System;
 using System.Text;
-using AutoMapper;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UserData;
-using UserData.Entities;
+using UserManagement.Business.Auth;
 using UserManagement.Business.Role;
 using UserManagement.Business.Users;
-using UserManagement.Models;
 
 namespace UserManagement;
 
@@ -36,7 +33,7 @@ public class Startup
 
         /***** [2] Configure Repositories *****/
         services.AddScoped(
-            typeof(IAuthenticationService), typeof(AuthenticationService)
+            typeof(IAuthService), typeof(AuthService)
         );
         services.AddScoped(
             typeof(IUserService), typeof(UserService)
@@ -47,11 +44,8 @@ public class Startup
             
 
         /***** [3] Configure AutoMapper *****/
-        var configuration = new MapperConfiguration(cfg => 
-        {
-            cfg.CreateMap<User, RegisterUserDto>().ReverseMap();
-            cfg.CreateMap<UserRole, RoleDto>().ReverseMap();
-        });
+
+        services.AddAutoMapper(typeof(UserManagementProfile));
 
 
         /***** [4] Configure CORS *****/

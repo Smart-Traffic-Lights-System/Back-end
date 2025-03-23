@@ -10,5 +10,6 @@ public class UserManagementProfile : Profile
     public UserManagementProfile()
     {
         CreateMap<User, RegisterUserDto>().ReverseMap();
+        CreateMap<UserRole, RoleDto>().ReverseMap();
     }
 }

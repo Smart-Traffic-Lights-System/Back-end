@@ -98,7 +98,7 @@ public class AuthService : IAuthService
         registerUserDto.ConfirmPassword = hashedPassword;
 
         User user = _mapper.Map<User>(registerUserDto);
-        user.UserRole.RoleId = 1; // Assuming 1 is the role ID for a regular user
+        user.Role.RoleId = 1; // Assuming 1 is the role ID for a regular user
         _context.User.Add(user);
         _context.SaveChanges();
 
@@ -106,7 +106,7 @@ public class AuthService : IAuthService
     }
 
     // SHA256 Encryption
-    public void HashPassword(string password, ref string hashedPassword)
+    private void HashPassword(string password, ref string hashedPassword)
     {
         byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
 

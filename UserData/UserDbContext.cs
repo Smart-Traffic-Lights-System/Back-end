@@ -20,10 +20,16 @@ public class UserDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserRole>()
-            .HasOne(e => e.User)
-            .WithOne(e => e.UserRole)
-            .HasForeignKey<User>("RoleId")
+            .HasOne(e => e.Usr)
+            .WithOne(e => e.Role)
+            .HasForeignKey("RoleId")
             .IsRequired();
+        
+        modelBuilder.Entity<User>()
+            .HasMany(u => u.UserActionLogs)  // A User has many UserActionLogs
+            .WithOne(log => log.Usr)        // Each UserActionLog belongs to one User
+            .HasForeignKey(log => log.Usr.UserId)  // Foreign Key in UserActionLog
+            .HasPrincipalKey(u => u.UserId);       // Primary Key in User
     }
 
 

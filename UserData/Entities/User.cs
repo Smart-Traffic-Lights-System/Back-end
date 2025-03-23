@@ -16,9 +16,11 @@ public class User
     public DateTime PhoneVerifiedAt { get; set; } = DateTime.MinValue;
     public string Username { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
-    public UserRole UserRole { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public UserRole Role { get; set; }
+    
+    public List<UserActionLog> UserActionLogs { get; set; } = new List<UserActionLog>();
 }
 
     
