@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QvyRicx5vMk=",
+  "success": true,
+  "projectFilePath": "F:\\REPOS\\Back-end\\UserManagement\\UserManagement.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\billa\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "C:\\Users\\billa\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
