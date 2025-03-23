@@ -18,9 +18,10 @@ public class User
     public string PasswordHash { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public int RoleId { get; set; } 
     public UserRole Role { get; set; }
     
-    public List<UserActionLog> UserActionLogs { get; set; } = new List<UserActionLog>();
+    public ICollection<UserActionLog> UserActionLogs { get; set; } = new List<UserActionLog>();
 }
 
     

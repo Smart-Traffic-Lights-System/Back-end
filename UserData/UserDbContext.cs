@@ -20,20 +20,24 @@ public class UserDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserRole>()
+            .HasKey(e => e.RoleId);
+        
+        modelBuilder.Entity<UserRole>()
             .HasOne(e => e.Usr)
             .WithOne(e => e.Role)
-            .HasForeignKey("RoleId")
+            .HasForeignKey<User>(e => e.RoleId)
             .IsRequired();
+
+        modelBuilder.Entity<UserActionLog>()
+            .HasKey(e => e.ActionLogId);
         
         modelBuilder.Entity<User>()
-            .HasMany(u => u.UserActionLogs)  // A User has many UserActionLogs
-            .WithOne(log => log.Usr)        // Each UserActionLog belongs to one User
-            .HasForeignKey(log => log.Usr.UserId)  // Foreign Key in UserActionLog
-            .HasPrincipalKey(u => u.UserId);       // Primary Key in User
+            .HasMany(e => e.UserActionLogs)
+            .WithOne(e => e.Usr)
+            .HasForeignKey(e => e.UserId)
+            .IsRequired();     
     }
-
-
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
