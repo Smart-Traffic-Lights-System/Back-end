@@ -23,6 +23,8 @@ public class Startup
      */
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddMvc();
+
         /***** [1] Configure ORM *****/
         services.AddDbContext<UserDbContext>();
 
@@ -32,7 +34,7 @@ public class Startup
         );*/
 
         /***** [3] Configure AutoMapper *****/
-        //services.AddAutoMapper(typeof(UserManagementProfile));
+        //services.AddAutoMapper(typeof(UserManagementProfile).Assembly);
 
         /***** [4] Configure CORS *****/
         services.AddCors(options =>
@@ -46,6 +48,8 @@ public class Startup
                                        .AllowAnyMethod();
                 });                    
         });
+
+        services.AddHttpContextAccessor();
 
         /***** [5] Configure Controllers *****/
         services.AddControllers();
