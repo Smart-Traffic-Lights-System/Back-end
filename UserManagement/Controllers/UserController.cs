@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Business.Users;
@@ -59,6 +60,39 @@ namespace UserManagement.Controllers
                     return NotFound(new ApiResponse { Status = "Error", Message = "User not found" });
                 }
                 return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
+
+        [HttpPut("UpdateUser/{userId}")]
+        public ActionResult<RegisterUserDto> ModifyUser([FromBody] RegisterUserDto userDto)
+        {
+            try
+            {
+                var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    return Unauthorized(new ApiResponse { Status = "Error", Message = "Invalid token" });
+                }
+                
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var jwtToken = tokenHandler.ReadJwtToken(token);
+
+                var userId = jwtToken.Payload["UserId"].ToString();
+
+                var existingUser = _userService.FindUserById(int.Parse(userId));
+                if (existingUser == null)
+                {
+                    return NotFound(new ApiResponse { Status = "Error", Message = "User not found" });
+                }
+
+                var updatedUser = _userService.ModifyUser(userDto, int.Parse(userId));
+
+                return Ok(updatedUser);
             }
             catch (Exception ex)
             {

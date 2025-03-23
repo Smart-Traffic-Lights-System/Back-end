@@ -2,6 +2,7 @@ using System;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using UserData;
+using UserManagement.Business.Auth;
 using UserManagement.Models;
 
 namespace UserManagement.Business.Users;
@@ -10,11 +11,13 @@ public class UserService : IUserService
 {
     private readonly UserDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IAuthService _authService;
 
-    public UserService(UserDbContext context, IMapper mapper)
+    public UserService(UserDbContext context, IMapper mapper, IAuthService authService)
     {
         _context = context;
         _mapper = mapper;
+        _authService = authService;
     }
 
     public void DeleteUserById(int id)
@@ -49,6 +52,57 @@ public class UserService : IUserService
 
     public RegisterUserDto ModifyUser(RegisterUserDto userDto, int userId)
     {
-        throw new NotImplementedException();
+        string firstName = userDto.FirstName;
+        UserBusinessLogic.DefineNameBL(firstName, "FirstName");
+        string lastName = userDto.LastName;
+        UserBusinessLogic.DefineNameBL(lastName, "LastName");
+        string email = userDto.Email;
+        UserBusinessLogic.DefineEmailBL(email);
+        string phone = userDto.PhoneNumber;
+        UserBusinessLogic.DefinePhoneNumberBL(phone);
+        string username = userDto.Username;
+        UserBusinessLogic.DefineUsernameBL(username);
+        string password = userDto.Password;
+        UserBusinessLogic.DefinePasswordBL(password);
+
+        string hashedPassword = string.Empty;
+        _authService.HashPassword(password, ref hashedPassword);
+        userDto.Password = hashedPassword;
+
+        var user = _context.User.FirstOrDefault(x => x.UserId == userId);
+        if (user == null)
+        {
+            throw new MyException("User not found");
+        }
+
+        if (userDto.FirstName != null)
+        {
+            user.FirstName = userDto.FirstName;
+        }
+        if (userDto.LastName != null)
+        {
+            user.LastName = userDto.LastName;
+        }
+        if (userDto.Email != null)
+        {
+            user.Email = userDto.Email;
+        }
+        if (userDto.PhoneNumber != null)
+        {
+            user.PhoneNumber = userDto.PhoneNumber;
+        }
+        if (userDto.Username != null)
+        {
+            user.Username = userDto.Username;
+        }
+        if (userDto.Password != null)
+        {
+            user.PasswordHash = userDto.Password;
+        }
+
+        var updatedUserDto = _mapper.Map<RegisterUserDto>(user);
+        updatedUserDto.UserId = 0;
+
+        return updatedUserDto;
     }
 }
