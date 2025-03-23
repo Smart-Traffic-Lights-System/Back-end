@@ -82,4 +82,12 @@ public class AuthService : IAuthService
         }
     }
 
+    public RegisterUserDto FindUserByUsername(string username)
+    {
+        var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
+        var user = usersList.FirstOrDefault(x => x.Username == username);
+
+        return user;
+    }
+
 }
