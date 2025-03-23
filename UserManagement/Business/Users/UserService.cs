@@ -52,6 +52,14 @@ public class UserService : IUserService
 
         return user;
     }
+    
+    public RegisterUserDto FindUserByEmail(string email)
+    {
+        var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
+        var user = usersList.FirstOrDefault(x => x.Email == email);
+
+        return user;
+    }
 
     public RegisterUserDto ModifyUser(RegisterUserDto userDto, int userId)
     {

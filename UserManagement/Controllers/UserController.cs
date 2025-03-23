@@ -68,6 +68,24 @@ namespace UserManagement.Controllers
             }
         }
 
+        [HttpGet("GetUserByEmail/{Email}")]
+        public ActionResult<RegisterUserDto> GetUserByEmail(string email)
+        {
+            try
+            {
+                var user = _userService.FindUserByEmail(email);
+                if (user == null)
+                {
+                    return NotFound(new ApiResponse { Status = "Error", Message = "User not found" });
+                }
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
+
         [HttpPut("UpdateUser/{UserId}")]
         public ActionResult<RegisterUserDto> ModifyUser([FromBody] RegisterUserDto userDto)
         {

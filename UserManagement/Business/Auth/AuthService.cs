@@ -70,10 +70,10 @@ public class AuthService : IAuthService
 
     }
 
-    public void Logout(string token)
+  /*  public string VerifyEmail(string email)
     {
-        throw new NotImplementedException();
-    }
+        var userDto = _userService.FindUserByEmail(email);
+    }*/
 
     public RegisterUserDto Register(RegisterUserDto registerUserDto)
     {
