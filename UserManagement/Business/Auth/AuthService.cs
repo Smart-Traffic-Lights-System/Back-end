@@ -63,6 +63,16 @@ public class AuthService : IAuthService
         _context.SaveChanges();
     }
 
+    public bool isPhoneVerified(string phone)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void UpdatePhoneVerificationDate(RegisterUserDto registerUserDto)
+    {
+        throw new NotImplementedException();
+    }
+
     public string Login(LoginUserDto loginUserDto)
     {
         var userDto = _context.User.FirstOrDefault(u => u.Username == loginUserDto.Username);

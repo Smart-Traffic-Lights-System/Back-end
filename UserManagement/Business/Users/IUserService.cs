@@ -9,6 +9,7 @@ public interface IUserService
     public RegisterUserDto FindUserByUsername(string username);
     public RegisterUserDto FindUserById(int id);
     public RegisterUserDto FindUserByEmail(string email);
+    public RegisterUserDto FindUserByPhone(string phone);
     public RegisterUserDto ModifyUser(RegisterUserDto userDto, int userId);
     public void DeleteUserById(int id);
 }

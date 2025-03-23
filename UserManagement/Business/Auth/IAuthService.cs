@@ -11,4 +11,6 @@ public interface IAuthService
     public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience);
     public bool isEmailVerified(string email);
     public void UpdateEmailVerificationDate(RegisterUserDto registerUserDto);
+    public bool isPhoneVerified(string phone);
+    public void UpdatePhoneVerificationDate(RegisterUserDto registerUserDto);
 }

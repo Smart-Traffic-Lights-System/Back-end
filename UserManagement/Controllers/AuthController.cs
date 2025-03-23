@@ -67,6 +67,21 @@ namespace UserManagement.Controllers
 
             return Ok("Email verified successfully");
         }
+        
+        [HttpGet]
+        [Route("Verify-Phone")]
+        public ActionResult<string> VerifyPhone([FromBody] LoginUserDto loginUserDto, string phone)
+        {
+            var user = _userService.FindUserByPhone(phone);
+            var isVerified = _authService.isPhoneVerified(phone);
+            if (isVerified)
+            {
+                return Ok("Phone number already verified");
+            }
+            _authService.UpdatePhoneVerificationDate(user);
+
+            return Ok("Phone number verified successfully");
+        }
 
 
         [HttpPost("Login")]
