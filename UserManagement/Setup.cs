@@ -13,8 +13,8 @@ public static class Setup
 
     public static void AdminLogin()
     {
-        var userId = 0;
-        var role = 0;
+        var userId = 1;
+        var role = 1;
         var username = "athanasiou";
         var tokenJwt = GenerateToken(userId.ToString(), username, role, configRoot["JWT:Key"], configRoot["JWT:Issuer"], configRoot["JWT:Audience"]);
     }

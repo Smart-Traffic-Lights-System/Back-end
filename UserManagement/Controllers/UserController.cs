@@ -101,7 +101,7 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser/{UserId}"), Authorize(Roles = "Admin")]
+        [HttpDelete("DeleteUser/{UserId}"), Authorize(Roles = "System Administrator")]
         public IActionResult DeleteUser(int id)
         {
             try

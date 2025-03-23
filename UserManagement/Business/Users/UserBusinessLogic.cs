@@ -73,7 +73,7 @@ public static class UserBusinessLogic
          * 
          * [1] The number of characters must be at least 10
          * [2] The number of characters must be at most 40
-         * [3] Must end in "@ethereal.email
+         * [3] Must end in @gmail.com or @outlook.com
          * [4] Must contain at least 1 letter
          * [5] Letters must be all Latin letters 
          * 
@@ -95,14 +95,14 @@ public static class UserBusinessLogic
             }
 
             // [3] Must end in "@ethereal.email"
-            bool isEmailFormat = email.EndsWith("@gmail.com") || email.EndsWith("@hotmail.com") || email.EndsWith("@outlook.com") || email.EndsWith("@ethereal.email");
+            bool isEmailFormat = email.EndsWith("@gmail.com") || email.EndsWith("@outlook.com");
             if (!isEmailFormat)
             {
                 throw new MyException("Error in email " +
-                                      "[3] Must end in \"@ethereal.email");
+                                      "[3] Must end in \"@gmail.com\" or \"@outlook.com\"");
             }
 
-            // [4] Must contain at least 1 lette
+            // [4] Must contain at least 1 letter
             string[] subEmails = email.Split('@');
             string emailUsername = subEmails[0];
             bool containsLetters = emailUsername.Any(char.IsLetter);
