@@ -53,37 +53,6 @@ namespace UserManagement.Controllers
             }
         }
         
-        [HttpGet]
-        [Route("Verify-Email")]
-        public ActionResult<string> VerifyEmail([FromBody] LoginUserDto loginUserDto, string email)
-        {
-            var user = _userService.FindUserByEmail(email);
-            var isVerified = _authService.isEmailVerified(email);
-            if (isVerified)
-            {
-                return Ok("Email already verified");
-            }
-            _authService.UpdateEmailVerificationDate(user);
-
-            return Ok("Email verified successfully");
-        }
-        
-        [HttpGet]
-        [Route("Verify-Phone")]
-        public ActionResult<string> VerifyPhone([FromBody] LoginUserDto loginUserDto, string phone)
-        {
-            var user = _userService.FindUserByPhone(phone);
-            var isVerified = _authService.isPhoneVerified(phone);
-            if (isVerified)
-            {
-                return Ok("Phone number already verified");
-            }
-            _authService.UpdatePhoneVerificationDate(user);
-
-            return Ok("Phone number verified successfully");
-        }
-
-
         [HttpPost("Login")]
         public IActionResult ValidateUser([FromBody] LoginUserDto model)
         {
@@ -131,6 +100,36 @@ namespace UserManagement.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
+        }
+        
+        [HttpGet]
+        [Route("Verify-Email")]
+        public ActionResult<string> VerifyEmail([FromBody] LoginUserDto loginUserDto, string email)
+        {
+            var user = _userService.FindUserByEmail(email);
+            var isVerified = _authService.isEmailVerified(email);
+            if (isVerified)
+            {
+                return Ok("Email already verified");
+            }
+            _authService.UpdateEmailVerificationDate(user);
+
+            return Ok("Email verified successfully");
+        }
+        
+        [HttpGet]
+        [Route("Verify-Phone")]
+        public ActionResult<string> VerifyPhone([FromBody] LoginUserDto loginUserDto, string phone)
+        {
+            var user = _userService.FindUserByPhone(phone);
+            var isVerified = _authService.isPhoneVerified(phone);
+            if (isVerified)
+            {
+                return Ok("Phone number already verified");
+            }
+            _authService.UpdatePhoneVerificationDate(user);
+
+            return Ok("Phone number verified successfully");
         }
     }
 }

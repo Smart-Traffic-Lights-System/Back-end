@@ -22,6 +22,61 @@ public class AuthService : IAuthService
         _context = context;
         _mapper = mapper;
     }
+    
+    public RegisterUserDto Register(RegisterUserDto registerUserDto)
+    {
+        // Business Logic for registering a user
+
+        string firstName = registerUserDto.FirstName;
+        UserBusinessLogic.DefineNameBL(firstName, "First Name");
+        string lastName = registerUserDto.LastName;
+        UserBusinessLogic.DefineNameBL(lastName, "Last Name");
+        string email = registerUserDto.Email;
+        UserBusinessLogic.DefineEmailBL(email);
+        string phoneNumber = registerUserDto.PhoneNumber;
+        UserBusinessLogic.DefinePhoneNumberBL(phoneNumber);
+        string username = registerUserDto.Username;
+        UserBusinessLogic.DefineUsernameBL(username);
+        string password = registerUserDto.Password;
+        UserBusinessLogic.DefinePasswordBL(password);
+
+        string hashedPassword = string.Empty;
+        HashPassword(password, ref hashedPassword);
+        registerUserDto.Password = hashedPassword;
+        registerUserDto.ConfirmPassword = hashedPassword;
+
+        User user = _mapper.Map<User>(registerUserDto);
+        user.CreatedAt = DateTime.Now;
+        user.Role.RoleId = 6; // Assuming 6 is the role ID for a regular user
+        
+        _context.User.Add(user);
+        _context.SaveChanges();
+
+        return _mapper.Map<RegisterUserDto>(user);
+    }
+    
+    public string Login(LoginUserDto loginUserDto)
+    {
+        var userDto = _context.User.FirstOrDefault(u => u.Username == loginUserDto.Username);
+        if (userDto == null)
+        {
+            return "User not found";
+        }
+
+        User user = _mapper.Map<User>(userDto);
+
+        string hashedPassword = string.Empty;
+        HashPassword(loginUserDto.Password, ref hashedPassword);
+
+        if (user.PasswordHash != hashedPassword)
+        {
+            return "Invalid password";
+        }
+        else
+        {
+            return "Login successful";
+        }
+    }
 
     public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
     {
@@ -81,60 +136,6 @@ public class AuthService : IAuthService
         user.PhoneVerifiedAt = DateTime.Now;
         user.IsPhoneVerified = true;
         _context.SaveChanges();
-    }
-
-    public string Login(LoginUserDto loginUserDto)
-    {
-        var userDto = _context.User.FirstOrDefault(u => u.Username == loginUserDto.Username);
-        if (userDto == null)
-        {
-            return "User not found";
-        }
-
-        User user = _mapper.Map<User>(userDto);
-
-        string hashedPassword = string.Empty;
-        HashPassword(loginUserDto.Password, ref hashedPassword);
-
-        if (user.PasswordHash != hashedPassword)
-        {
-            return "Invalid password";
-        }
-        else
-        {
-            return "Login successful";
-        }
-
-    }
-
-    public RegisterUserDto Register(RegisterUserDto registerUserDto)
-    {
-        // Business Logic for registering a user
-
-        string firstName = registerUserDto.FirstName;
-        UserBusinessLogic.DefineNameBL(firstName, "First Name");
-        string lastName = registerUserDto.LastName;
-        UserBusinessLogic.DefineNameBL(lastName, "Last Name");
-        string email = registerUserDto.Email;
-        UserBusinessLogic.DefineEmailBL(email);
-        string phoneNumber = registerUserDto.PhoneNumber;
-        UserBusinessLogic.DefinePhoneNumberBL(phoneNumber);
-        string username = registerUserDto.Username;
-        UserBusinessLogic.DefineUsernameBL(username);
-        string password = registerUserDto.Password;
-        UserBusinessLogic.DefinePasswordBL(password);
-
-        string hashedPassword = string.Empty;
-        HashPassword(password, ref hashedPassword);
-        registerUserDto.Password = hashedPassword;
-        registerUserDto.ConfirmPassword = hashedPassword;
-
-        User user = _mapper.Map<User>(registerUserDto);
-        user.Role.RoleId = 1; // Assuming 1 is the role ID for a regular user
-        _context.User.Add(user);
-        _context.SaveChanges();
-
-        return _mapper.Map<RegisterUserDto>(user);
     }
 
     // SHA256 Encryption
