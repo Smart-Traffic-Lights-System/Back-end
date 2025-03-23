@@ -28,11 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
 		<ProjectReference Include="..\UserData\UserData.csproj" />
 	</ItemGroup>
 
