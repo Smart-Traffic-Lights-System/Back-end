@@ -47,7 +47,7 @@ public class AuthService : IAuthService
 
         User user = _mapper.Map<User>(registerUserDto);
         user.CreatedAt = DateTime.Now;
-        user.Role.RoleId = 6; // Assuming 6 is the role ID for a regular user
+        user.Role = "Regular User";
         
         _context.User.Add(user);
         _context.SaveChanges();

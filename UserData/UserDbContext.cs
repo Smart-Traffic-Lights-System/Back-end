@@ -15,19 +15,9 @@ public class UserDbContext : DbContext
 
     public virtual DbSet<User> User { get; set; } = null!;
     public virtual DbSet<UserActionLog> UserActionLog { get; set; } = null!;
-    public virtual DbSet<UserRole> UserRole { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserRole>()
-            .HasKey(e => e.RoleId);
-        
-        modelBuilder.Entity<UserRole>()
-            .HasOne(e => e.Usr)
-            .WithOne(e => e.Role)
-            .HasForeignKey<User>(e => e.RoleId)
-            .IsRequired();
-
         modelBuilder.Entity<UserActionLog>()
             .HasKey(e => e.ActionLogId);
         

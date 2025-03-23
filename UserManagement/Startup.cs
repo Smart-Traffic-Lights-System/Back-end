@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UserData;
 using UserManagement.Business.Auth;
-using UserManagement.Business.Role;
 using UserManagement.Business.Users;
 
 namespace UserManagement;
@@ -38,10 +37,7 @@ public class Startup
         services.AddScoped(
             typeof(IUserService), typeof(UserService)
         );
-        services.AddScoped(
-            typeof(IRoleService), typeof(RoleService)
-        );
-            
+           
 
         /***** [3] Configure AutoMapper *****/
 
