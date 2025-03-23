@@ -20,7 +20,6 @@ public class User
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public int RoleId { get; set; } 
     public UserRole Role { get; set; }
-    
     public ICollection<UserActionLog> UserActionLogs { get; set; } = new List<UserActionLog>();
 }
 

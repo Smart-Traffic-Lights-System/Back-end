@@ -19,20 +19,12 @@ public class UserService : IUserService
         _context = context;
         _mapper = mapper;
     }
-
-    public void DeleteUserById(int id)
-    {
-        var userToDelete = _context.User.FirstOrDefault(u => u.UserId == id);
-
-        _context.User.Remove(userToDelete);
-        _context.SaveChanges();
-    }
-
+    
     public IEnumerable<RegisterUserDto> FindAllUsers()
     {
         return _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
     }
-
+    
     public RegisterUserDto FindUserById(int id)
     {
         var user = _context.User.FirstOrDefault(x => x.UserId == id);
@@ -44,20 +36,12 @@ public class UserService : IUserService
         var userDto = _mapper.Map<RegisterUserDto>(user);
         return userDto;
     }
-
+    
     public RegisterUserDto FindUserByUsername(string username)
     {
         var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
         var user = usersList.FirstOrDefault(x => x.Username == username);
 
-        return user;
-    }
-
-    public RegisterUserDto FindUserByPhone(string phone)
-    {
-        var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
-        var user = usersList.FirstOrDefault(x => x.PhoneNumber == phone);
-        
         return user;
     }
     
@@ -68,7 +52,15 @@ public class UserService : IUserService
 
         return user;
     }
-
+    
+    public RegisterUserDto FindUserByPhone(string phone)
+    {
+        var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
+        var user = usersList.FirstOrDefault(x => x.PhoneNumber == phone);
+        
+        return user;
+    }
+    
     public RegisterUserDto ModifyUser(RegisterUserDto userDto, int userId)
     {
         string firstName = userDto.FirstName;
@@ -118,11 +110,23 @@ public class UserService : IUserService
         {
             user.PasswordHash = userDto.Password;
         }
+        
+        user.UpdatedAt = DateTime.Now;
+        _context.SaveChanges();
 
         var updatedUserDto = _mapper.Map<RegisterUserDto>(user);
         updatedUserDto.UserId = 0;
+        
 
         return updatedUserDto;
+    }
+    
+    public void DeleteUserById(int id)
+    {
+        var userToDelete = _context.User.FirstOrDefault(u => u.UserId == id);
+
+        _context.User.Remove(userToDelete);
+        _context.SaveChanges();
     }
     
     private void HashPassword(string password, ref string hashedPassword)
