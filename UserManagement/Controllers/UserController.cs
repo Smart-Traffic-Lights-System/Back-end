@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserManagement.Business.Users;
+using UserManagement.Models;
 
 namespace UserManagement.Controllers
 {
@@ -7,5 +9,25 @@ namespace UserManagement.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        [HttpGet("GetAllUsers")]
+        public ActionResult<IEnumerable<RegisterUserDto>> GetAllUsers()
+        {
+            try
+            {
+                var users = _userService.FindAllUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
     }
 }

@@ -14,13 +14,16 @@ namespace UserManagement.Business.Auth;
 
 public class AuthService : IAuthService
 {
-    private UserDbContext _context;
-    private IMapper _mapper;
+    private readonly UserDbContext _context;
+    private readonly IMapper _mapper;
 
-    public AuthService(UserDbContext context, IMapper mapper)
+    private readonly IUserService _userService;
+
+    public AuthService(UserDbContext context, IMapper mapper, IUserService userService)
     {
         _context = context;
         _mapper = mapper;
+        _userService = userService;
     }
 
     public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
@@ -45,7 +48,7 @@ public class AuthService : IAuthService
 
     public string Login(LoginUserDto loginUserDto)
     {
-        var userDto = FindUserByUsername(loginUserDto.Username);
+        var userDto = _userService.FindUserByUsername(loginUserDto.Username);
         if (userDto == null)
         {
             return "User not found";
@@ -113,13 +116,4 @@ public class AuthService : IAuthService
             hashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "");
         }
     }
-
-    public RegisterUserDto FindUserByUsername(string username)
-    {
-        var usersList = _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
-        var user = usersList.FirstOrDefault(x => x.Username == username);
-
-        return user;
-    }
-
 }

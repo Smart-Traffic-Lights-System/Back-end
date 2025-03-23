@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Business;
 using UserManagement.Business.Auth;
+using UserManagement.Business.Users;
 using UserManagement.Models;
 
 namespace UserManagement.Controllers
@@ -14,18 +15,21 @@ namespace UserManagement.Controllers
         private readonly IConfiguration _configuration;
         private readonly IAuthService _authService;
 
-        public AuthController(IConfiguration configuration, IAuthService authService)
+        private readonly IUserService _userService;
+
+        public AuthController(IConfiguration configuration, IAuthService authService, IUserService userService)
         {
             _configuration = configuration;
             _authService = authService;
+            _userService = userService;
         }
-
+        
         [HttpPost("Register")]
         public ActionResult<RegisterUserDto> AddUser([FromBody] RegisterUserDto model)
         {
             try 
             {
-                var userDto = _authService.FindUserByUsername(model.Username);
+                var userDto = _userService.FindUserByUsername(model.Username);
                 if (userDto != null)
                 {
                     return BadRequest($"Username \"{model.Username}\" already exists.");
@@ -68,7 +72,7 @@ namespace UserManagement.Controllers
                 
                 if (userStatus.Equals("Login successful"))
                 {
-                    var user = _authService.FindUserByUsername(model.Username);
+                    var user = _userService.FindUserByUsername(model.Username);
 
                     string key = _configuration["JWT:Key"];
                     string issuer = _configuration["JWT:Issuer"];
@@ -88,7 +92,7 @@ namespace UserManagement.Controllers
 
                 return Unauthorized();
             }
-                        catch (ArgumentNullException ex)
+            catch (ArgumentNullException ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
