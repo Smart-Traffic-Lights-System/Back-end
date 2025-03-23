@@ -3,13 +3,13 @@ using UserData.Entities;
 
 namespace UserData;
 
-public class UserContext : DbContext
+public class UserDbContext : DbContext
 {
-    public UserContext()
+    public UserDbContext()
     {
     }
 
-    public UserContext(DbContextOptions<UserContext> options) : base(options)
+    public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
     {
     }
 
@@ -31,19 +31,21 @@ public class UserContext : DbContext
         if (environment == "Development")
         {
             connectionString =
-                "server=DESKTOP-FG9B3DG\\SQLEXPRESS;" +   
-                "database=UserDatabase_Development;" +
-                "Integrated Security=True;" +
-                "MultipleActiveResultSets=True;" +
+                "Server=localhost,1433;" +
+                "Initial Catalog=UserDbDevelopment;" + 
+                "Integrated Security=False;" +
+                "User Id=sa;" +
+                "Password=MyPass@word;" +
                 "TrustServerCertificate=True";
         }
         else if (environment == "Production")
         {
             connectionString =
-                "server=DESKTOP-FG9B3DG\\SQLEXPRESS;" +   
-                "database=UserDatabase_Production;" +
-                "Integrated Security=True;" +
-                "MultipleActiveResultSets=True;" +
+                "Server=localhost,1433;" +
+                "Initial Catalog=UserDb;" + 
+                "Integrated Security=False;" +
+                "User Id=sa;" +
+                "Password=MyPass@word;" +
                 "TrustServerCertificate=True";
         }
         else

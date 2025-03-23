@@ -24,7 +24,7 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         /***** [1] Configure ORM *****/
-        services.AddDbContext<UserContext>();
+        services.AddDbContext<UserDbContext>();
 
         /***** [2] Configure Repositories *****/
         /*services.AddScoped(
