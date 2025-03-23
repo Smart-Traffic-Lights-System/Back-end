@@ -34,7 +34,10 @@ public class Startup
         );*/
 
         /***** [3] Configure AutoMapper *****/
-        //services.AddAutoMapper(typeof(UserManagementProfile).Assembly);
+        /*services.AddAutoMapper(cfg =>
+        {
+            cfg.AddProfile<UserManagementProfile>();
+        });*/
 
         /***** [4] Configure CORS *****/
         services.AddCors(options =>

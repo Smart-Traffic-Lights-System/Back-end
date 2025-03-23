@@ -9,7 +9,7 @@ public class UserManagementProfile : Profile
 {
     public UserManagementProfile()
     {
-        CreateMap<User, UserDto>();
+        CreateMap<User, RegisterUserDto>();
         // CreateMap<UserDto, User>();
         // CreateMap<UserActionLog, UserActionLogDto>();
         // CreateMap<UserActionLogDto, UserActionLog>();
