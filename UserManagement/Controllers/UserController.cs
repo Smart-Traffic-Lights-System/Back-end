@@ -29,5 +29,23 @@ namespace UserManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
         }
+
+        [HttpGet("GetUserById/{id}")]
+        public ActionResult<RegisterUserDto> GetUserById(int id)
+        {
+            try
+            {
+                var user = _userService.FindUserById(id);
+                if (user == null)
+                {
+                    return NotFound(new ApiResponse { Status = "Error", Message = "User not found" });
+                }
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
     }
 }

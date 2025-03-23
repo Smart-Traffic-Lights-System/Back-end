@@ -29,7 +29,14 @@ public class UserService : IUserService
 
     public RegisterUserDto FindUserById(int id)
     {
-        throw new NotImplementedException();
+        var user = _context.User.FirstOrDefault(x => x.UserId == id);
+        if (user == null)
+        {
+            return null;
+        }
+
+        var userDto = _mapper.Map<RegisterUserDto>(user);
+        return userDto;
     }
 
     public RegisterUserDto FindUserByUsername(string username)
