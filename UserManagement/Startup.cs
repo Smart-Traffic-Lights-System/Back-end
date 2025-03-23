@@ -1,9 +1,14 @@
 using System;
 using System.Text;
+using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UserData;
+using UserData.Entities;
+using UserManagement.Business.Users;
+using UserManagement.Models;
 
 namespace UserManagement;
 
@@ -29,15 +34,20 @@ public class Startup
         services.AddDbContext<UserDbContext>();
 
         /***** [2] Configure Repositories *****/
-        /*services.AddScoped(
+        services.AddScoped(
             typeof(IAuthenticationService), typeof(AuthenticationService)
-        );*/
+        );
+        services.AddScoped(
+            typeof(IUserService), typeof(UserService)
+        );
+            
 
         /***** [3] Configure AutoMapper *****/
-        /*services.AddAutoMapper(cfg =>
+        var configuration = new MapperConfiguration(cfg => 
         {
-            cfg.AddProfile<UserManagementProfile>();
-        });*/
+            cfg.CreateMap<User, RegisterUserDto>().ReverseMap();
+        });
+
 
         /***** [4] Configure CORS *****/
         services.AddCors(options =>
