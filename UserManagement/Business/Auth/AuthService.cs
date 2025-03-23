@@ -46,6 +46,7 @@ public class AuthService : IAuthService
         registerUserDto.ConfirmPassword = hashedPassword;
 
         User user = _mapper.Map<User>(registerUserDto);
+        user.PasswordHash = hashedPassword;
         user.CreatedAt = DateTime.Now;
         user.Role = "Regular User";
         

@@ -58,12 +58,16 @@ public class Startup
         });
 
         services.AddHttpContextAccessor();
+        
+        /****** [5] Admin Login ******/
+        Setup.configRoot = configRoot;
+        Setup.AdminLogin();
 
-        /***** [5] Configure Controllers *****/
+        /***** [6] Configure Controllers *****/
         services.AddControllers();
         services.AddEndpointsApiExplorer();
 
-        /***** [6] Configure Swagger *****/
+        /***** [7] Configure Swagger *****/
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserManagement", Version = "v1" });
@@ -92,7 +96,7 @@ public class Startup
             });
         });
 
-        /***** [7] Configure Authentication *****/
+        /***** [8] Configure Authentication *****/
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {

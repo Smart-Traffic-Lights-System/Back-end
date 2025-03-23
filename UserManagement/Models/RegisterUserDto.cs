@@ -13,7 +13,7 @@ public class RegisterUserDto
     [Required(ErrorMessage = "Email is required")]
     public string Email { get; set; } = string.Empty;
     [Required(ErrorMessage = "Date of Birth is required")]
-    public DateTime DateOfBirth { get; set; } = DateTime.MinValue;
+    public DateTime DateOfBirth { get; set; }
     [Required(ErrorMessage = "Phone Number is required")]
     public string PhoneNumber { get; set; } = string.Empty;
     [Required(ErrorMessage = "Username is required")]

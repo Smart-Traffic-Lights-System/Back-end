@@ -15,8 +15,10 @@ public static class Setup
     {
         var userId = 1;
         var role = "System Administrator";
-        var username = "athanasiou";
+        var username = "athadmin";
         var tokenJwt = GenerateToken(userId.ToString(), username, role, configRoot["JWT:Key"], configRoot["JWT:Issuer"], configRoot["JWT:Audience"]);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        token = tokenHandler.WriteToken(tokenJwt);
     }
 
     private static JwtSecurityToken GenerateToken(string userId, string username, string role, string key, string issuer, string audience)
@@ -29,7 +31,7 @@ public static class Setup
             expires: DateTime.Now.AddHours(1),
             claims: new[]
             {
-                new Claim("UserId", userId.ToString()),
+                new Claim("UserId", userId),
                 new Claim("Username", username),
                 new Claim("Role", role)
             },
