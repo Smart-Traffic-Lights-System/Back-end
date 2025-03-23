@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UserData;
 using UserData.Entities;
+using UserManagement.Business.Role;
 using UserManagement.Business.Users;
 using UserManagement.Models;
 
@@ -39,6 +40,9 @@ public class Startup
         );
         services.AddScoped(
             typeof(IUserService), typeof(UserService)
+        );
+        services.AddScoped(
+            typeof(IRoleService), typeof(RoleService)
         );
             
 

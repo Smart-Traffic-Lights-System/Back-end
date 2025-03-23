@@ -22,6 +22,14 @@ public class RoleService : IRoleService
 
     public RoleDto FindRoleById(int roleId)
     {
-        throw new NotImplementedException();
+        var role = _context.UserRole.FirstOrDefault(x => x.RoleId == roleId);
+        if (role == null)
+        {
+            return null;
+        }
+
+        var roleDto = _mapper.Map<RoleDto>(role);
+        
+        return roleDto;
     }
 }
