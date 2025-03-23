@@ -14,12 +14,12 @@ public static class Setup
     public static void AdminLogin()
     {
         var userId = 1;
-        var role = 1;
+        var role = "System Administrator";
         var username = "athanasiou";
         var tokenJwt = GenerateToken(userId.ToString(), username, role, configRoot["JWT:Key"], configRoot["JWT:Issuer"], configRoot["JWT:Audience"]);
     }
 
-    private static JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
+    private static JwtSecurityToken GenerateToken(string userId, string username, string role, string key, string issuer, string audience)
     {
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
@@ -31,7 +31,7 @@ public static class Setup
             {
                 new Claim("UserId", userId.ToString()),
                 new Claim("Username", username),
-                new Claim("RoleId", roleId.ToString())
+                new Claim("Role", role)
             },
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );

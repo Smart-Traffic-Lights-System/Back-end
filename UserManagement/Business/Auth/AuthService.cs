@@ -78,7 +78,7 @@ public class AuthService : IAuthService
         }
     }
 
-    public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
+    public JwtSecurityToken GenerateToken(string userId, string username, string role, string key, string issuer, string audience)
     {
         var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
@@ -90,7 +90,7 @@ public class AuthService : IAuthService
             {
                 new Claim("UserId", userId.ToString()),
                 new Claim("Username", username),
-                new Claim("RoleId", roleId.ToString())
+                new Claim("Role", role)
             },
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );
