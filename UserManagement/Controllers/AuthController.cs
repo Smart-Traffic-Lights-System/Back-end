@@ -88,6 +88,14 @@ namespace UserManagement.Controllers
 
                 return Unauthorized();
             }
+                        catch (ArgumentNullException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
         }
     }
 }
