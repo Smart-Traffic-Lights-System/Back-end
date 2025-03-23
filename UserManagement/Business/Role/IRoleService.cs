@@ -4,6 +4,6 @@ namespace UserManagement.Business.Role;
 
 public interface IRoleService
 {
-    public IEnumerable<RoleDto> GetAllRoles();
-    public RoleDto GetRoleById(int roleId);
+    public IEnumerable<RoleDto> FindAllRoles();
+    public RoleDto FindRoleById(int roleId);
 }

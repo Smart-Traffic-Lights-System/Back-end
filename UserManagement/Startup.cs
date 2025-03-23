@@ -46,6 +46,7 @@ public class Startup
         var configuration = new MapperConfiguration(cfg => 
         {
             cfg.CreateMap<User, RegisterUserDto>().ReverseMap();
+            cfg.CreateMap<UserRole, RoleDto>().ReverseMap();
         });
 
 
