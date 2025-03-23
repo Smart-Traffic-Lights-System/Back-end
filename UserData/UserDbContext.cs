@@ -19,9 +19,14 @@ public class UserDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<UserActionLog>()
-            .HasKey(e => e.ActionLogId);
+        modelBuilder.Entity<UserRole>()
+            .HasOne(e => e.User)
+            .WithOne(e => e.UserRole)
+            .HasForeignKey<User>("RoleId")
+            .IsRequired();
     }
+
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

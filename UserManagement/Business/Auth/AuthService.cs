@@ -98,7 +98,7 @@ public class AuthService : IAuthService
         registerUserDto.ConfirmPassword = hashedPassword;
 
         User user = _mapper.Map<User>(registerUserDto);
-        user.RoleId = 2; // Assuming 2 is the role ID for a regular user
+        user.UserRole.RoleId = 1; // Assuming 1 is the role ID for a regular user
         _context.User.Add(user);
         _context.SaveChanges();
 

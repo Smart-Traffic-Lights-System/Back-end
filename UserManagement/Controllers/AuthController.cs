@@ -78,9 +78,9 @@ namespace UserManagement.Controllers
                     string issuer = _configuration["JWT:Issuer"];
                     string audience = _configuration["JWT:Audience"];
                     
-                    if (user.UserId > 1)
+                    if (user.UserId > 0)
                     {
-                        var token = _authService.GenerateToken(user.UserId.ToString(), user.Username, 2, key, issuer, audience);
+                        var token = _authService.GenerateToken(user.UserId.ToString(), user.Username, 1, key, issuer, audience);
                         var jwtHandler = new JwtSecurityTokenHandler();
                         var tokenString = jwtHandler.WriteToken(token);
 

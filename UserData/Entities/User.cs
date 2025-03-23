@@ -16,7 +16,7 @@ public class User
     public DateTime PhoneVerifiedAt { get; set; } = DateTime.MinValue;
     public string Username { get; set; } = string.Empty;
     public string PasswordHash { get; set; } = string.Empty;
-    public int RoleId { get; set; }
+    public UserRole UserRole { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
