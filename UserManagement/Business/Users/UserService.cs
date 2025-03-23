@@ -24,7 +24,7 @@ public class UserService : IUserService
 
     public IEnumerable<RegisterUserDto> FindAllUsers()
     {
-        throw new NotImplementedException();
+        return _mapper.Map<IEnumerable<RegisterUserDto>>(_context.User);
     }
 
     public RegisterUserDto FindUserById(int id)
