@@ -103,8 +103,7 @@ namespace UserManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
         }
-
-
+        
         [HttpPut("UpdateUser/{UserId}")]
         public ActionResult<RegisterUserDto> ModifyUser([FromBody] RegisterUserDto userDto)
         {

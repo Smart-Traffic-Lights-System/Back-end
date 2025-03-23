@@ -47,7 +47,7 @@ public class AuthService : IAuthService
     {
         var user = _context.User.FirstOrDefault(u => u.Email == email);
 
-        if (user.EmailVerifiedAt.Equals(""))
+        if (!user.IsEmailVerified)
         {
             return false;
         }
@@ -65,12 +65,22 @@ public class AuthService : IAuthService
 
     public bool isPhoneVerified(string phone)
     {
-        throw new NotImplementedException();
+        var user = _context.User.FirstOrDefault(u => u.PhoneNumber == phone);
+
+        if (!user.IsPhoneVerified)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void UpdatePhoneVerificationDate(RegisterUserDto registerUserDto)
     {
-        throw new NotImplementedException();
+        var user = _context.User.Find(registerUserDto.UserId);
+        user.PhoneVerifiedAt = DateTime.Now;
+        user.IsPhoneVerified = true;
+        _context.SaveChanges();
     }
 
     public string Login(LoginUserDto loginUserDto)
