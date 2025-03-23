@@ -9,11 +9,6 @@ public class UserManagementProfile : Profile
 {
     public UserManagementProfile()
     {
-        CreateMap<User, RegisterUserDto>();
-        // CreateMap<UserDto, User>();
-        // CreateMap<UserActionLog, UserActionLogDto>();
-        // CreateMap<UserActionLogDto, UserActionLog>();
-        // CreateMap<UserRole, UserRoleDto>();
-        // CreateMap<UserRoleDto, UserRole>();
+        CreateMap<User, RegisterUserDto>().ReverseMap();
     }
 }

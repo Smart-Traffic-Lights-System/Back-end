@@ -1,6 +1,6 @@
 using System;
 
-namespace UserManagement.Business.User;
+namespace UserManagement.Business.Users;
 
 public class UserService
 {
