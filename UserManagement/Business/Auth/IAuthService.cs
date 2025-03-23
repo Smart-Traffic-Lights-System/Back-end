@@ -9,4 +9,6 @@ public interface IAuthService
     public RegisterUserDto Register(RegisterUserDto registerUserDto);
     public string Login(LoginUserDto loginUserDto);
     public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience);
+    public bool isEmailVerified(string email);
+    public void UpdateEmailVerificationDate(RegisterUserDto registerUserDto);
 }

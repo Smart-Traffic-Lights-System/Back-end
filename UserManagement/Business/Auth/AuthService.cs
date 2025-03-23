@@ -16,14 +16,11 @@ public class AuthService : IAuthService
 {
     private readonly UserDbContext _context;
     private readonly IMapper _mapper;
-
-    private readonly IUserService _userService;
-
-    public AuthService(UserDbContext context, IMapper mapper, IUserService userService)
+    
+    public AuthService(UserDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
-        _userService = userService;
     }
 
     public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
@@ -46,9 +43,29 @@ public class AuthService : IAuthService
         return token;
     }
 
+    public bool isEmailVerified(string email)
+    {
+        var user = _context.User.FirstOrDefault(u => u.Email == email);
+
+        if (user.EmailVerifiedAt.Equals(""))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void UpdateEmailVerificationDate(RegisterUserDto registerUserDto)
+    {
+        var user = _context.User.Find(registerUserDto.UserId);
+        user.EmailVerifiedAt = DateTime.Now;
+        user.IsEmailVerified = true;
+        _context.SaveChanges();
+    }
+
     public string Login(LoginUserDto loginUserDto)
     {
-        var userDto = _userService.FindUserByUsername(loginUserDto.Username);
+        var userDto = _context.User.FirstOrDefault(u => u.Username == loginUserDto.Username);
         if (userDto == null)
         {
             return "User not found";
@@ -69,11 +86,6 @@ public class AuthService : IAuthService
         }
 
     }
-
-  /*  public string VerifyEmail(string email)
-    {
-        var userDto = _userService.FindUserByEmail(email);
-    }*/
 
     public RegisterUserDto Register(RegisterUserDto registerUserDto)
     {

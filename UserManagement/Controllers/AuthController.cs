@@ -52,6 +52,22 @@ namespace UserManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
         }
+        
+        [HttpGet]
+        [Route("Verify-Email")]
+        public ActionResult<string> VerifyEmail([FromBody] LoginUserDto loginUserDto, string email)
+        {
+            var user = _userService.FindUserByEmail(email);
+            var isVerified = _authService.isEmailVerified(email);
+            if (isVerified)
+            {
+                return Ok("Email already verified");
+            }
+            _authService.UpdateEmailVerificationDate(user);
+
+            return Ok("Email verified successfully");
+        }
+
 
         [HttpPost("Login")]
         public IActionResult ValidateUser([FromBody] LoginUserDto model)
