@@ -5,7 +5,7 @@ namespace UserManagement.Models;
 
 public class RegisterUserDto
 {
-    public long UserId { get; set; }
+    public int UserId { get; set; }
     [Required(ErrorMessage = "First Name is required")]
     public string FirstName { get; set; } = string.Empty;
     [Required(ErrorMessage = "Last Name is required")]

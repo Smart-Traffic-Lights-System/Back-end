@@ -1,7 +1,10 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using UserData;
 using UserData.Entities;
 using UserManagement.Business.Users;
@@ -20,22 +23,51 @@ public class AuthService : IAuthService
         _mapper = mapper;
     }
 
-    public string GenerateToken(string userId, string role)
+    public JwtSecurityToken GenerateToken(string userId, string username, int roleId, string key, string issuer, string audience)
     {
-        throw new NotImplementedException();
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+
+        var token = new JwtSecurityToken(
+            issuer: issuer,
+            audience: audience,
+            expires: DateTime.Now.AddHours(1),
+            claims: new[]
+            {
+                new Claim("UserId", userId.ToString()),
+                new Claim("Username", username),
+                new Claim("RoleId", roleId.ToString())
+            },
+            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+        );
+
+        return token;
     }
 
-    public LoginUserDto Login(LoginUserDto loginUserDto)
+    public string Login(LoginUserDto loginUserDto)
     {
-        throw new NotImplementedException();
+        var userDto = FindUserByUsername(loginUserDto.Username);
+        if (userDto == null)
+        {
+            return "User not found";
+        }
+
+        User user = _mapper.Map<User>(userDto);
+
+        string hashedPassword = string.Empty;
+        HashPassword(loginUserDto.Password, ref hashedPassword);
+
+        if (user.PasswordHash != hashedPassword)
+        {
+            return "Invalid password";
+        }
+        else
+        {
+            return "Login successful";
+        }
+
     }
 
     public void Logout(string token)
-    {
-        throw new NotImplementedException();
-    }
-
-    public string RefreshToken(string token)
     {
         throw new NotImplementedException();
     }

@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Business;
@@ -45,6 +46,47 @@ namespace UserManagement.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
+            }
+        }
+
+        [HttpPost("Login")]
+        public IActionResult ValidateUser([FromBody] LoginUserDto model)
+        {
+            try 
+            {
+                var userStatus = _authService.Login(model);
+                
+                if (userStatus.Equals("User not found"))
+                {
+                    return NotFound(userStatus);
+                }
+                
+                if (userStatus.Equals("Invalid password"))
+                {
+                    return Unauthorized(userStatus);
+                }
+                
+                if (userStatus.Equals("Login successful"))
+                {
+                    var user = _authService.FindUserByUsername(model.Username);
+
+                    string key = _configuration["JWT:Key"];
+                    string issuer = _configuration["JWT:Issuer"];
+                    string audience = _configuration["JWT:Audience"];
+                    
+                    if (user.UserId > 1)
+                    {
+                        var token = _authService.GenerateToken(user.UserId.ToString(), user.Username, 2, key, issuer, audience);
+                        var jwtHandler = new JwtSecurityTokenHandler();
+                        var tokenString = jwtHandler.WriteToken(token);
+
+                        return Ok(tokenString); // User Token
+                    }
+                    
+                    return Ok(Setup.token); // Admin Token
+                }
+
+                return Unauthorized();
             }
         }
     }
