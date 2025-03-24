@@ -66,8 +66,24 @@ public class Startup
         /***** [6] Configure Controllers *****/
         services.AddControllers();
         services.AddEndpointsApiExplorer();
+        
+        /***** [7] Configure Authentication *****/
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false; // For development only, set to true in production
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = configRoot["JWT:Issuer"],
+                    ValidAudience = configRoot["JWT:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configRoot["JWT:Key"]))
+                };
+            });
 
-        /***** [7] Configure Swagger *****/
+        /***** [8] Configure Swagger *****/
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserManagement", Version = "v1" });
@@ -95,22 +111,6 @@ public class Startup
                 }
             });
         });
-
-        /***** [8] Configure Authentication *****/
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false; // For development only, set to true in production
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidIssuer = configRoot["JWT:Issuer"],
-                    ValidAudience = configRoot["JWT:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configRoot["JWT:Key"]))
-                };
-            });
     }
 
         public void Configure(WebApplication app, IWebHostEnvironment env)

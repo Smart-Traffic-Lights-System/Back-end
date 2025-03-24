@@ -14,26 +14,26 @@ public static class Setup
     public static void AdminLogin()
     {
         var userId = 1;
-        var role = "System Administrator";
+        var role = "Administrator";
         var username = "athadmin";
-        var tokenJwt = GenerateToken(userId.ToString(), username, role, configRoot["JWT:Key"], configRoot["JWT:Issuer"], configRoot["JWT:Audience"]);
+        var tokenJwt = GetToken(userId, username, role);
         var tokenHandler = new JwtSecurityTokenHandler();
         token = tokenHandler.WriteToken(tokenJwt);
     }
 
-    private static JwtSecurityToken GenerateToken(string userId, string username, string role, string key, string issuer, string audience)
+    private static JwtSecurityToken GetToken(int userId, string username, string role) // Add userId, username and role parameters
     {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configRoot["JWT:Key"]));
 
         var token = new JwtSecurityToken(
-            issuer: issuer,
-            audience: audience,
-            expires: DateTime.Now.AddHours(1),
+            issuer: configRoot["JWT:Issuer"],
+            audience: configRoot["JWT:Audience"],
+            expires: DateTime.Now.AddDays(1),
             claims: new[]
             {
-                new Claim("UserId", userId),
-                new Claim("Username", username),
-                new Claim("Role", role)
+                new Claim("userId", userId.ToString()), // Add userId claim
+                new Claim("username", username),        // Add username claim
+                new Claim("role", role)                 // Add role claim
             },
             signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
         );

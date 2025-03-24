@@ -19,7 +19,8 @@ namespace UserManagement.Controllers
             _userService = userService;
         }
 
-        [HttpGet("GetAllUsers"), Authorize(Roles = "System Administrator")]
+        [HttpGet]
+        [Route("GetAllUsers"), Authorize(Roles = "Administrator")]
         public ActionResult<IEnumerable<RegisterUserDto>> GetAllUsers()
         {
             try
@@ -33,7 +34,8 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpGet("GetUserById/{UserId}"), Authorize(Roles = "System Administrator")]
+        [HttpGet]
+        [Route("GetUserById"), Authorize(Roles = "Administrator")]
         public ActionResult<RegisterUserDto> GetUserById(int id)
         {
             try
@@ -50,8 +52,9 @@ namespace UserManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
         }
-
-        [HttpGet("GetUserByUsername/{Username}")]
+        
+        [HttpGet]
+        [Route("GetUserByUsername"), Authorize]
         public ActionResult<RegisterUserDto> GetUserByUsername(string username)
         {
             try
@@ -68,8 +71,9 @@ namespace UserManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new ApiResponse { Status = "Error", Message = ex.Message });
             }
         }
-
-        [HttpGet("GetUserByEmail/{Email}")]
+        
+        [HttpGet]
+        [Route("GetUserByEmail"), Authorize]
         public ActionResult<RegisterUserDto> GetUserByEmail(string email)
         {
             try
@@ -87,7 +91,8 @@ namespace UserManagement.Controllers
             }
         }
         
-        [HttpGet("GetUserByPhone/{Phone}")]
+        [HttpGet]
+        [Route("GetUserByPhone"), Authorize]
         public ActionResult<RegisterUserDto> GetUserByPhone(string phone)
         {
             try
@@ -105,7 +110,8 @@ namespace UserManagement.Controllers
             }
         }
         
-        [HttpPut("UpdateUser/{UserId}")]
+        [HttpPut]
+        [Route("UpdateUser"), Authorize]
         public ActionResult<RegisterUserDto> ModifyUser([FromBody] RegisterUserDto userDto)
         {
             try
@@ -138,7 +144,8 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpDelete("DeleteUser/{UserId}"), Authorize(Roles = "System Administrator")]
+        [HttpDelete]
+        [Route("DeleteUser"), Authorize(Roles = "Administrator")]
         public IActionResult DeleteUser(int id)
         {
             try
