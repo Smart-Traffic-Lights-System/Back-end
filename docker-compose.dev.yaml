@@ -1,0 +1,34 @@
+﻿services:
+  usermanagement:
+    container_name: usermanagement
+    
+    ports:
+      - '8080:8080'
+    environment:
+      - APSNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=localhost,1433;Database=UserDB;User Id=sa;Password=MyPass@word;
+    depends_on:
+      - sqlserver
+    networks:
+      - usermanagement_network
+   
+    
+  sqlserver:
+    container_name: sqlserver
+    
+    ports:
+      - '1433:1433'
+    volumes:
+      - sql_data:/var/opt/mssql
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_ENABLE_HADR: '1'
+      MSSQL_AGENT_ENABLED: '1'
+      SA_PASSWORD: 'MyPass@word'
+    networks:
+      - usermanagement_network
+
+volumes:
+  sql_data:
+    driver: local
+      
