@@ -7,7 +7,8 @@ using UserManagement.Models;
 
 namespace UserManagement.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/v1.0/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -18,7 +19,7 @@ namespace UserManagement.Controllers
             _userService = userService;
         }
 
-        [HttpGet("GetAllUsers")]
+        [HttpGet("GetAllUsers"), Authorize(Roles = "System Administrator")]
         public ActionResult<IEnumerable<RegisterUserDto>> GetAllUsers()
         {
             try
@@ -32,7 +33,7 @@ namespace UserManagement.Controllers
             }
         }
 
-        [HttpGet("GetUserById/{UserId}")]
+        [HttpGet("GetUserById/{UserId}"), Authorize(Roles = "System Administrator")]
         public ActionResult<RegisterUserDto> GetUserById(int id)
         {
             try

@@ -5250,32 +5250,39 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\billa\\.nuget\\packages\\": {}
+    "C:\\Users\\Ath\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\REPOS\\Back-end\\UserManagement\\UserManagement.csproj",
+      "projectUniqueName": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserManagement\\UserManagement.csproj",
       "projectName": "UserManagement",
-      "projectPath": "F:\\REPOS\\Back-end\\UserManagement\\UserManagement.csproj",
-      "packagesPath": "C:\\Users\\billa\\.nuget\\packages\\",
-      "outputPath": "F:\\REPOS\\Back-end\\UserManagement\\obj\\",
+      "projectPath": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserManagement\\UserManagement.csproj",
+      "packagesPath": "C:\\Users\\Ath\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserManagement\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\billa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Ath\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "F:\\REPOS\\Back-end\\UserData\\UserData.csproj": {
-              "projectPath": "F:\\REPOS\\Back-end\\UserData\\UserData.csproj"
+            "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserData\\UserData.csproj": {
+              "projectPath": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserData\\UserData.csproj"
             }
           }
         }

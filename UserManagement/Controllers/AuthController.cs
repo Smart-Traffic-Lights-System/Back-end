@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserManagement.Business;
@@ -8,7 +9,7 @@ using UserManagement.Models;
 
 namespace UserManagement.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1.0/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -102,7 +103,7 @@ namespace UserManagement.Controllers
             }
         }
         
-        [HttpGet]
+        [HttpPost]
         [Route("Verify-Email")]
         public ActionResult<string> VerifyEmail([FromBody] LoginUserDto loginUserDto, string email)
         {
@@ -117,7 +118,7 @@ namespace UserManagement.Controllers
             return Ok("Email verified successfully");
         }
         
-        [HttpGet]
+        [HttpPost]
         [Route("Verify-Phone")]
         public ActionResult<string> VerifyPhone([FromBody] LoginUserDto loginUserDto, string phone)
         {
