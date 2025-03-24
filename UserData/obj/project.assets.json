@@ -4805,31 +4805,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ath\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\billa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserData\\UserData.csproj",
+      "projectUniqueName": "F:\\REPOS\\Back-end\\UserData\\UserData.csproj",
       "projectName": "UserData",
-      "projectPath": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserData\\UserData.csproj",
-      "packagesPath": "C:\\Users\\Ath\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ath\\Downloads\\ΔΙΠΛΩΜΑΤΙΚΗ_git\\Back-end\\UserData\\obj\\",
+      "projectPath": "F:\\REPOS\\Back-end\\UserData\\UserData.csproj",
+      "packagesPath": "C:\\Users\\billa\\.nuget\\packages\\",
+      "outputPath": "F:\\REPOS\\Back-end\\UserData\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Ath\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\billa\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
