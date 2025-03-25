@@ -8,8 +8,8 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["UserStore/UserStore.csproj", "UserStore/"]
-COPY ["UserData/UserData.csproj", "UserData/"]
+COPY ["/UserManagementService/UserStore/UserStore.csproj", "UserStore/"]
+COPY ["/UserManagementService/UserData/UserData.csproj", "UserData/"]
 RUN dotnet restore "UserStore/UserStore.csproj"
 COPY . .
 WORKDIR "/src/UserStore"

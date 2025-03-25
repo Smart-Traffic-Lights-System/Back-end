@@ -5,7 +5,7 @@ services:
   userstore:
     build:
       context: .
-      dockerfile: UserStore/Dockerfile
+      dockerfile: UserManagementService/Dockerfile
   
 networks:
   mgmt_network:
