@@ -1,0 +1,12 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  
+  userstore:
+    build:
+      context: .
+      dockerfile: UserStore/Dockerfile
+  
+networks:
+  mgmt_network:
+    driver: bridge

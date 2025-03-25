@@ -1,0 +1,30 @@
+services:
+  sqlserver:
+    container_name: sqlserver
+    ports:
+      - '1433:1433'
+    restart: always
+    volumes:
+      - /sqlserver_data:/var/opt/mssql
+    environment:
+      MSSQL_SA_PASSWORD: 'MyPass@word'
+      ACCEPT_EULA: 'Y'
+    
+    networks:
+      - mgmt_network
+  
+  userstore:
+    container_name: userstore
+    ports:
+      - '5176:8080'
+    restart: always
+    environment:
+      ConnectionStrings__DefaultConnection: 'Server=sqlserver;Database=UserStore;User Id=sa;Password=MyPass@word;'
+    
+    networks:
+      - mgmt_network
+
+volumes:
+  sqlserver_data:
+    driver: local
+  

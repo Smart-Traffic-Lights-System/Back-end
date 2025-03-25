@@ -47,7 +47,7 @@ public class UserDbContext : DbContext
         else if (environment == "Production")
         {
             connectionString =
-                "Server=localhost;" +
+                "Server=sqlserver;" +
                 "Initial Catalog=UserDb;" + 
                 "Integrated Security=False;" +
                 "User Id=sa;" +
