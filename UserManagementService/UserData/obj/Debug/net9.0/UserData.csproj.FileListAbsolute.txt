@@ -1,0 +1,15 @@
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\bin\Debug\net9.0\UserData.deps.json
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\bin\Debug\net9.0\UserData.runtimeconfig.json
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\bin\Debug\net9.0\UserData.dll
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\bin\Debug\net9.0\UserData.pdb
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.csproj.AssemblyReference.cache
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.GeneratedMSBuildEditorConfig.editorconfig
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.AssemblyInfoInputs.cache
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.AssemblyInfo.cs
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.csproj.CoreCompileInputs.cache
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.sourcelink.json
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.dll
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\refint\UserData.dll
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.pdb
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\UserData.genruntimeconfig.cache
+F:\REPOS\Smart-Traffic-Lights-System\UserManagementService\UserData\obj\Debug\net9.0\ref\UserData.dll

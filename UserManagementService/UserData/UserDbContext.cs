@@ -30,16 +30,14 @@ public class UserDbContext : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
         string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
         
         var connectionString = "";
 
         if (environment == "Development")
         {
             connectionString =
-                "Server=localhost,1433;" +
+                "Server=localhost;" +
                 "Initial Catalog=UserDbDevelopment;" + 
                 "Integrated Security=False;" +
                 "User Id=sa;" +
@@ -49,7 +47,7 @@ public class UserDbContext : DbContext
         else if (environment == "Production")
         {
             connectionString =
-                "Server=localhost,1433;" +
+                "Server=localhost;" +
                 "Initial Catalog=UserDb;" + 
                 "Integrated Security=False;" +
                 "User Id=sa;" +
