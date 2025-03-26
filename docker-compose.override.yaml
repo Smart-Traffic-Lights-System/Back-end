@@ -20,7 +20,9 @@ services:
     restart: always
     environment:
       ConnectionStrings__DefaultConnection: 'Server=sqlserver;Database=UserStore;User Id=sa;Password=MyPass@word;TrustServerCertificate=True'
-    
+    depends_on:
+      - sqlserver
+
     networks:
       - mgmt_network
 
