@@ -4805,24 +4805,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\billa\\.nuget\\packages\\": {}
+    "/home/ath/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\REPOS\\Smart-Traffic-Lights-System\\UserManagementService\\UserData\\UserData.csproj",
+      "projectUniqueName": "/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/UserData.csproj",
       "projectName": "UserData",
-      "projectPath": "F:\\REPOS\\Smart-Traffic-Lights-System\\UserManagementService\\UserData\\UserData.csproj",
-      "packagesPath": "C:\\Users\\billa\\.nuget\\packages\\",
-      "outputPath": "F:\\REPOS\\Smart-Traffic-Lights-System\\UserManagementService\\UserData\\obj\\",
+      "projectPath": "/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/UserData.csproj",
+      "packagesPath": "/home/ath/.nuget/packages/",
+      "outputPath": "/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\billa\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/ath/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4841,7 +4842,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -4900,7 +4901,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.104/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

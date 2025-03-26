@@ -1,0 +1,8 @@
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.csproj.AssemblyReference.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.GeneratedMSBuildEditorConfig.editorconfig
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.AssemblyInfoInputs.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.AssemblyInfo.cs
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.csproj.CoreCompileInputs.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.MvcApplicationPartsAssemblyInfo.cs
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.MvcApplicationPartsAssemblyInfo.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/obj/Release/net9.0/UserStore.sourcelink.json

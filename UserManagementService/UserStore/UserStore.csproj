@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-		<ProjectReference Include="..\UserData\UserData.csproj" />
+		<ProjectReference Include="../UserData/UserData.csproj" />
 	</ItemGroup>
 
 </Project>

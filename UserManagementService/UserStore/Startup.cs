@@ -1,6 +1,6 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using UserData;
@@ -28,7 +28,8 @@ public class Startup
         services.AddMvc();
 
         /***** [1] Configure ORM *****/
-        services.AddDbContext<UserDbContext>();
+        services.AddDbContext<UserDbContext>(options =>
+            options.UseSqlServer(configRoot.GetConnectionString("DefaultConnection")));
 
         /***** [2] Configure Repositories *****/
         services.AddScoped(
@@ -51,7 +52,7 @@ public class Startup
                 policy =>
                 {
                     policy.WithOrigins("http://localhost:3000",  // Client URL   
-                                       "https://localhost:5297") // Server URL
+                                       "http://localhost:8080") // Server URL
                                        .AllowAnyHeader()
                                        .AllowAnyMethod();
                 });                    
@@ -86,7 +87,7 @@ public class Startup
         /***** [8] Configure Swagger *****/
         services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserManagement", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management Service", Version = "v1.0" });
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 In = ParameterLocation.Header,
@@ -120,7 +121,7 @@ public class Startup
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "UserManagement v1");
+                    c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "User Management Service v1");
                 });
             }
 

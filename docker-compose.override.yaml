@@ -19,7 +19,7 @@ services:
       - '5176:8080'
     restart: always
     environment:
-      ConnectionStrings__DefaultConnection: 'Server=sqlserver;Database=UserStore;User Id=sa;Password=MyPass@word;'
+      ConnectionStrings__DefaultConnection: 'Server=sqlserver;Database=UserStore;User Id=sa;Password=MyPass@word;TrustServerCertificate=True'
     
     networks:
       - mgmt_network

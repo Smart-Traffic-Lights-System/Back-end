@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\buildMultiTargeting\UserStore.props" />
+  <Import Project="../buildMultiTargeting/UserStore.props" />
 </Project>

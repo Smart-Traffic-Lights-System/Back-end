@@ -1,0 +1,15 @@
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/UserData.deps.json
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/UserData.runtimeconfig.json
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/UserData.dll
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserStore/UserData.pdb
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.csproj.AssemblyReference.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.GeneratedMSBuildEditorConfig.editorconfig
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.AssemblyInfoInputs.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.AssemblyInfo.cs
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.csproj.CoreCompileInputs.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.sourcelink.json
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.dll
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/refint/UserData.dll
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.pdb
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/UserData.genruntimeconfig.cache
+/home/ath/Desktop/Smart-Traffic-Lights-System/UserManagementService/UserData/obj/Release/net9.0/ref/UserData.dll
